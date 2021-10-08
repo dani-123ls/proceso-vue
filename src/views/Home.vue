@@ -28,7 +28,7 @@
                 </div>
                 <button type="reset">Limpiar</button>
                 <!-- <button onclick="procesarInformacion()" type="button">Agregar Compra</button> -->
-                <button @click="procesarInformacion" type="button">Agregar Compra</button><!--los ()los utilizo en la función, si voy a pasarle parametros, sino no -->
+                <button @click="procesarInformacion" ,@click="limpiarFormulario" type="button">Agregar Compra</button><!--los ()los utilizo en la función, si voy a pasarle parametros, sino no -->
                 
             </form>
             <!-- <h3>Cliente: {{compra.cliente}}</h3>
@@ -96,8 +96,15 @@ this.listaProductos = [producto1, producto2, producto3, producto4, producto5];//
             valoresEnvio : [20000, 10000],
             listaCompras:[],
         };
+
+        
     },
     methods:{//atributo
+
+        limpiarFormulario(){
+           compra.cliente=="";
+
+        },
         procesarInformacion(){
              this.compra.total =0;
         this.compra.descuento=0;
@@ -127,8 +134,12 @@ this.listaProductos = [producto1, producto2, producto3, producto4, producto5];//
     }
         
     this.compra.total = valorEnvio + subtotal -  this.compra.descuento;//falta el this?
-        
-    this.listaCompras.push(this.compra);    
+    
+    let unaCompra = this.compra;   //para ayudarme a trabajar con varible independiente
+    
+    this.listaCompras.push(unaCompra); 
+    
+    
         }
     },
   name: 'Home',
