@@ -17,7 +17,7 @@
         <input type="text" name="documento" v-model="compra.documento" />
         <label for="producto">Producto:</label>
         <select name="producto" id="productos" v-model="seleccion">
-          s
+          
           <option value="-1">Seleccione un producto</option>
           <!--me ahorro el for de función cargar compras-->
           <option
@@ -177,9 +177,6 @@ export default {
 </script>
 
 <style scoped>
-body {
-  padding: 1rem;
-}
 
 #form_compra {
   display: grid;
@@ -190,6 +187,7 @@ main {
   display: grid;
   grid-template-columns: 4fr 8fr;
   column-gap: 1rem;
+  padding: 2rem;
 }
 table {
   width: 80%;
