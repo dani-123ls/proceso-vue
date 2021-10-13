@@ -1,7 +1,14 @@
 <template>
-  <header>
+   <header>
+    <img class="logo" src="@/assets/logo.png" alt="logo">
+  <div id="nav">
+    <router-link to="/">Registrar Compra</router-link> |
+    <router-link to="/compras">Lista de Compras</router-link> |
+    <router-link :to="{name:'login'}">  CerrarSesión </router-link> 
+  </div>
+        </header>
     <h1>{{ titulo }}</h1>
-  </header>
+  
   <main>
     <div>
       <!--crear secciones-->
@@ -54,7 +61,7 @@
             <h3>Documento: {{prueba}}</h3> -->
     </div>
 
-    <div>
+    <!-- <div>
       <h2>Listado de Compras</h2>
       <table border="1">
         <thead>
@@ -80,36 +87,42 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
   </main>
+<p></p>
+
 </template>
 
 <script>
 // @ is an alias to /src
-
+import ProductoService from "@/services/productos.js";//me manda traer los servicios
+import CompraService from "@/services/compras.js";
 export default {
   mounted() {
-    //para cargar información tan pronto inicie la página
-    let producto1 = { nombre: "Disco Duro", precio: 200000 }; //lo mismo a java o python clave-valor
-    let producto2 = { nombre: "Teclado", precio: 100000 };
-    let producto3 = { nombre: "Mouse", precio: 80000 };
-    let producto4 = { nombre: "Pantalla", precio: 8000000 };
-    let producto5 = { nombre: "Memoria USB", precio: 50000 };
+    this.listaProductos= ProductoService.obtenerTodos();//guardo todos esos servicios acá 
+    this.listaCompras = CompraService.obtenerTodos();
 
-    this.listaProductos = [
-      producto1,
-      producto2,
-      producto3,
-      producto4,
-      producto5,
-    ]; //cuidado, el this
+    //para cargar información tan pronto inicie la página
+    // let producto1 = { nombre: "Disco Duro", precio: 200000 }; //lo mismo a java o python clave-valor
+    // let producto2 = { nombre: "Teclado", precio: 100000 };
+    // let producto3 = { nombre: "Mouse", precio: 80000 };
+    // let producto4 = { nombre: "Pantalla", precio: 8000000 };
+    // let producto5 = { nombre: "Memoria USB", precio: 50000 };
+
+    // this.listaProductos = [
+    //   producto1,
+    //   producto2,
+    //   producto3,
+    //   producto4,
+    //   producto5,
+    // ]; //cuidado, el this
   },
   data() {
     //regresa un objeto,todo tipo de datos dentro de return
     return {
       //las represento con un diccionario
       listaProductos: [],
-      titulo: "Registro y listado de compras",
+      titulo: "Registro de compra",
       compra: {
         cliente: "",
         documento: "",
@@ -169,6 +182,8 @@ export default {
 
       this.limpiarFormulario();//forma correcta de pasarlo
       
+      this.$router.push({name:"Compras"});//funcion de manera programatica- tan pronto elimine, para que cambie
+      //de tal manera que se vaya de una pantalla a otra, se puede trabajar para que me mande al carrito
     },
   },
   name: "Home",
